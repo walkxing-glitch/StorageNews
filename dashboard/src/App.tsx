@@ -350,3 +350,10 @@ function App() {
               </div>
             </>
           )}
+        </div>
+      </main>
+    </div>
+  );
+}
+
+export default App;
