@@ -1,24 +1,37 @@
-# Production Dockerfile for Backend Server
-FROM node:18-alpine AS base
+# Build stage
+FROM node:18-alpine AS builder
 
-# Install dumb-init for proper signal handling
-RUN apk add --no-cache dumb-init
-
-# Set working directory
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production && npm cache clean --force
+# Install all dependencies (including devDependencies for build)
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Build application
+RUN npm run build
 
 # Production stage
-FROM base AS production
+FROM node:18-alpine AS production
 
-# Copy built application
-COPY dist/ ./dist/
-COPY src/ ./src/
+# Install dumb-init for proper signal handling
+RUN apk add --no-cache dumb-init
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install only production dependencies
+RUN npm ci --only=production && npm cache clean --force
+
+# Copy built application and source (some scripts may rely on src)
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/src ./src
 
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs
