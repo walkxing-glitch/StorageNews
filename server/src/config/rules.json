@@ -1,0 +1,314 @@
+{
+    "sourceWeights": {
+        "Blocks and Files": 1.5,
+        "StorageNewsletter": 1.4,
+        "The Register": 1.2,
+        "The Register - Storage": 1.2,
+        "DOIT": 1.1,
+        "存储在线": 1.1,
+        "中国存储网": 1.0
+    },
+    "categoryWeights": {
+        "Acquisition": 1.5,
+        "Product": 1.4,
+        "Technology": 1.3,
+        "Financial": 1.2,
+        "Partnership": 1.1,
+        "Market": 1.0,
+        "General": 0.8
+    },
+    "highValueKeywords": [
+        "acquisition",
+        "acquire",
+        "merger",
+        "buy",
+        "launch",
+        "announce",
+        "release",
+        "unveil",
+        "breakthrough",
+        "first",
+        "new generation",
+        "AI",
+        "artificial intelligence",
+        "machine learning",
+        "NVMe",
+        "PCIe 5",
+        "Gen5",
+        "ransomware",
+        "cyber",
+        "security",
+        "earnings",
+        "revenue",
+        "billion",
+        "million",
+        "IPO",
+        "funding",
+        "investment"
+    ],
+    "vendorWeights": {
+        "Dell EMC": 1.3,
+        "NetApp": 1.3,
+        "Pure Storage": 1.2,
+        "HPE": 1.2,
+        "Hitachi Vantara": 1.1,
+        "IBM Storage": 1.2,
+        "VAST Data": 1.2,
+        "Nutanix": 1.1,
+        "Cohesity": 1.1,
+        "Veeam": 1.1,
+        "Western Digital": 1.1,
+        "Seagate": 1.1,
+        "Samsung": 1.1,
+        "Micron": 1.0
+    },
+    "newsApiQueries": [
+        "enterprise storage",
+        "data storage technology",
+        "flash storage SSD NVMe",
+        "Dell EMC storage OR NetApp OR Pure Storage",
+        "cloud storage enterprise",
+        "backup disaster recovery"
+    ],
+    "rssSources": [
+        {
+            "name": "Blocks and Files",
+            "url": "https://blocksandfiles.com/feed/",
+            "enabled": true,
+            "language": "en"
+        },
+        {
+            "name": "StorageNewsletter",
+            "url": "https://www.storagenewsletter.com/feed/",
+            "enabled": true,
+            "language": "en"
+        },
+        {
+            "name": "The Register - Storage",
+            "url": "https://www.theregister.com/data_centre/storage/headlines.atom",
+            "enabled": true,
+            "language": "en"
+        },
+        {
+            "name": "存储在线",
+            "url": "http://www.stor-age.net.cn/rss.xml",
+            "enabled": true,
+            "language": "zh"
+        },
+        {
+            "name": "DOIT",
+            "url": "https://www.doit.com.cn/feed",
+            "enabled": true,
+            "language": "zh"
+        },
+        {
+            "name": "中国存储网",
+            "url": "http://www.chinastor.com/rss.xml",
+            "enabled": true,
+            "language": "zh"
+        }
+    ],
+    "vendorKeywords": {
+        "Dell EMC": [
+            "dell emc",
+            "dell technologies",
+            "powerstore",
+            "powermax",
+            "powerscale",
+            "isilon",
+            "unity",
+            "vmax",
+            "vnx",
+            "xtremio",
+            "data domain"
+        ],
+        "NetApp": [
+            "netapp",
+            "ontap",
+            "aff",
+            "fas",
+            "storagegrid",
+            "e-series",
+            "solidfire",
+            "cloud volumes"
+        ],
+        "Pure Storage": [
+            "pure storage",
+            "flasharray",
+            "flashblade",
+            "portworx",
+            "purity"
+        ],
+        "HPE": [
+            "hpe",
+            "hewlett packard enterprise",
+            "nimble",
+            "primera",
+            "alletra",
+            "3par",
+            "storeonce",
+            "simplivity"
+        ],
+        "Hitachi Vantara": [
+            "hitachi vantara",
+            "hitachi storage",
+            "vsp",
+            "hds"
+        ],
+        "IBM Storage": [
+            "ibm storage",
+            "flashsystem",
+            "spectrum",
+            "storwize",
+            "ds8000"
+        ],
+        "Huawei Storage": [
+            "huawei storage",
+            "oceanstor",
+            "dorado"
+        ],
+        "VAST Data": [
+            "vast data"
+        ],
+        "Infinidat": [
+            "infinidat",
+            "infinibox"
+        ],
+        "Nutanix": [
+            "nutanix"
+        ],
+        "Cohesity": [
+            "cohesity",
+            "dataprotect"
+        ],
+        "Veeam": [
+            "veeam"
+        ],
+        "Commvault": [
+            "commvault"
+        ],
+        "Veritas": [
+            "veritas",
+            "netbackup"
+        ],
+        "Qumulo": [
+            "qumulo"
+        ],
+        "WekaIO": [
+            "weka",
+            "wekaio"
+        ],
+        "MinIO": [
+            "minio"
+        ],
+        "Seagate": [
+            "seagate"
+        ],
+        "Western Digital": [
+            "western digital",
+            "wd",
+            "sandisk"
+        ],
+        "Samsung": [
+            "samsung ssd",
+            "samsung storage"
+        ],
+        "Micron": [
+            "micron"
+        ],
+        "Kioxia": [
+            "kioxia",
+            "toshiba memory"
+        ],
+        "SK Hynix": [
+            "sk hynix"
+        ]
+    },
+    "categoryKeywords": {
+        "Product": [
+            "launch",
+            "release",
+            "announce",
+            "new product",
+            "unveil",
+            "introduce",
+            "debut"
+        ],
+        "Financial": [
+            "earnings",
+            "revenue",
+            "quarterly",
+            "fiscal",
+            "profit",
+            "financial",
+            "stock",
+            "shares"
+        ],
+        "Acquisition": [
+            "acquire",
+            "acquisition",
+            "merger",
+            "buy",
+            "purchase",
+            "deal"
+        ],
+        "Partnership": [
+            "partner",
+            "partnership",
+            "collaborate",
+            "alliance",
+            "agreement"
+        ],
+        "Technology": [
+            "technology",
+            "innovation",
+            "breakthrough",
+            "research",
+            "development",
+            "patent"
+        ],
+        "Market": [
+            "market",
+            "industry",
+            "trend",
+            "forecast",
+            "analysis",
+            "report",
+            "gartner",
+            "idc"
+        ]
+    },
+    "storageKeywords": [
+        "enterprise storage",
+        "data storage",
+        "storage array",
+        "storage system",
+        "flash storage",
+        "all-flash array",
+        "hybrid storage",
+        "software-defined storage",
+        "SDS",
+        "storage virtualization",
+        "SAN",
+        "NAS",
+        "object storage",
+        "block storage",
+        "file storage",
+        "unified storage",
+        "SSD",
+        "NVMe",
+        "HDD",
+        "hard drive",
+        "solid state",
+        "flash memory",
+        "backup",
+        "recovery",
+        "data protection",
+        "disaster recovery",
+        "ransomware protection",
+        "cyber recovery",
+        "cloud storage",
+        "hybrid cloud storage",
+        "multi-cloud storage"
+    ]
+}
