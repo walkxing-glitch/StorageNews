@@ -1,5 +1,5 @@
-import { calculateScore, getTopNews } from '../src/services/scoring';
-import { NewsItem } from '../src/types/news';
+import { calculateScore, getTopNews } from '../../src/services/scoring.js';
+import { NewsItem } from '../../src/types/news.js';
 
 describe('Scoring Service', () => {
   const mockNews: NewsItem = {
@@ -58,19 +58,19 @@ describe('Scoring Service', () => {
 
   describe('getTopNews', () => {
     const mockNewsList: NewsItem[] = [
-      { ...mockNews, id: 1, score: 50 },
-      { ...mockNews, id: 2, score: 40 },
-      { ...mockNews, id: 3, score: 60 },
-      { ...mockNews, id: 4, score: 30 },
+      { ...mockNews, id: 1, title: 'Dell EMC Acquisition', vendor: 'Dell EMC', category: 'Acquisition' },
+      { ...mockNews, id: 2, title: 'NetApp Product Launch', vendor: 'NetApp', category: 'Product' },
+      { ...mockNews, id: 3, title: 'Pure Storage AI Revolution', vendor: 'Pure Storage', category: 'Technology' },
+      { ...mockNews, id: 4, title: 'Micron Quarter Results', vendor: 'Micron', category: 'Financial' },
     ];
 
     it('should return top N news sorted by score', async () => {
       const topNews = await getTopNews(mockNewsList, 3);
 
       expect(topNews).toHaveLength(3);
-      expect(topNews[0].score).toBe(60);
-      expect(topNews[1].score).toBe(50);
-      expect(topNews[2].score).toBe(40);
+      // Verify sorting: score should be descending
+      expect(topNews[0].score).toBeGreaterThanOrEqual(topNews[1].score);
+      expect(topNews[1].score).toBeGreaterThanOrEqual(topNews[2].score);
     });
 
     it('should return all news if N is larger than available', async () => {

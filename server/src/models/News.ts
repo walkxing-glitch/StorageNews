@@ -121,6 +121,9 @@ export async function getNews(options: {
   params.push(limit, offset);
 
   const result = await pool.query(query, params);
+  if (!result) {
+    console.error('DEBUG: pool.query returned undefined!', { query, params });
+  }
   return result.rows;
 }
 

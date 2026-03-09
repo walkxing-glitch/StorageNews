@@ -23,7 +23,7 @@ jest.mock('../src/services/ai.js', () => ({
 // Mock database connection for tests
 jest.mock('../src/config/database.js', () => ({
   pool: {
-    query: jest.fn(),
-    connect: jest.fn(),
+    query: jest.fn().mockResolvedValue({ rows: [] }),
+    connect: jest.fn().mockResolvedValue({ release: jest.fn() }),
   },
 }));

@@ -1,12 +1,21 @@
-import { initWeChatBot, sendToWeChatBot, getWeChatBotStatus } from '../src/services/wechaty-bot';
+import { initWeChatBot, sendToWeChatBot, getWeChatBotStatus } from '../../src/services/wechaty-bot.js';
 
 // Mock wechaty dependencies
 jest.mock('wechaty', () => ({
-  Wechaty: jest.fn().mockImplementation(() => ({
-    on: jest.fn(),
-    start: jest.fn().mockResolvedValue(undefined),
-    stop: jest.fn().mockResolvedValue(undefined),
-  })),
+  WechatyBuilder: {
+    build: jest.fn().mockImplementation(() => ({
+      on: jest.fn().mockReturnThis(),
+      start: jest.fn().mockResolvedValue(undefined),
+      stop: jest.fn().mockResolvedValue(undefined),
+      Room: {
+        findAll: jest.fn().mockResolvedValue([]),
+      },
+    })),
+  },
+  ScanStatus: {
+    Waiting: 0,
+    Timeout: 1,
+  },
 }));
 
 jest.mock('qrcode-terminal', () => ({
@@ -25,7 +34,7 @@ describe('WeChat Bot Service', () => {
       // Mock environment variable
       process.env.WECHAT_BOT_ENABLED = 'true';
 
-      const { initWeChatBot } = await import('../src/services/wechaty-bot');
+      const { initWeChatBot } = await import('../../src/services/wechaty-bot');
       const bot = await initWeChatBot();
 
       expect(bot).toBeDefined();
@@ -34,7 +43,7 @@ describe('WeChat Bot Service', () => {
     it('should skip initialization when disabled', async () => {
       process.env.WECHAT_BOT_ENABLED = 'false';
 
-      const { initWeChatBot } = await import('../src/services/wechaty-bot');
+      const { initWeChatBot } = await import('../../src/services/wechaty-bot');
       const bot = await initWeChatBot();
 
       expect(bot).toBeDefined(); // Still returns instance but doesn't start
@@ -47,14 +56,14 @@ describe('WeChat Bot Service', () => {
     });
 
     it('should return false when bot is not initialized', async () => {
-      const { sendToWeChatBot } = await import('../src/services/wechaty-bot');
+      const { sendToWeChatBot } = await import('../../src/services/wechaty-bot');
       const result = await sendToWeChatBot([]);
 
       expect(result).toBe(false);
     });
 
     it('should return false when bot is not ready', async () => {
-      const { initWeChatBot, sendToWeChatBot } = await import('../src/services/wechaty-bot');
+      const { initWeChatBot, sendToWeChatBot } = await import('../../src/services/wechaty-bot');
       await initWeChatBot();
 
       const result = await sendToWeChatBot([]);
@@ -64,7 +73,7 @@ describe('WeChat Bot Service', () => {
 
   describe('getWeChatBotStatus', () => {
     it('should return false when bot is not initialized', () => {
-      const { getWeChatBotStatus } = require('../src/services/wechaty-bot');
+      const { getWeChatBotStatus } = require('../../src/services/wechaty-bot');
       const status = getWeChatBotStatus();
 
       expect(status).toBe(false);

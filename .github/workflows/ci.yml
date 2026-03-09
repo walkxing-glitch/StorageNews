@@ -8,8 +8,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  # github.repository returns username/repository (e.g., walkxing-glitch/StorageNews)
-  # 建议显式写死为小写，避免 GitHub 仓库名的大小写对镜像名字造成干扰
+  # 显式使用小写镜像名，避免大小写导致的权限或拉取问题
   SERVER_IMAGE_NAME: walkxing-glitch/storagenews-server
   DASHBOARD_IMAGE_NAME: walkxing-glitch/storagenews-dashboard
 
@@ -19,8 +18,9 @@ jobs:
     
     services:
       postgres:
-        image: postgres:14
+        image: postgres:15-alpine
         env:
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: storage_news_test
         options: >-
@@ -39,19 +39,24 @@ jobs:
       with:
         node-version: '18'
         cache: 'npm'
-        cache-dependency-path: server/package-lock.json
+        cache-dependency-path: |
+          server/package-lock.json
+          dashboard/package-lock.json
     
-    - name: Install dependencies
+    # 后端检查
+    - name: Install Server dependencies
       working-directory: ./server
       run: npm ci
     
-    - name: Build TypeScript
+    - name: Run Server Lint
       working-directory: ./server
-      run: npm run build
+      run: npm run lint || echo "Lint warnings found"
     
-    - name: Run tests
+    - name: Server Build & Test
       working-directory: ./server
-      run: npm test || echo "No tests configured yet"
+      run: |
+        npm run build
+        npm test
       env:
         DB_HOST: localhost
         DB_PORT: 5432
@@ -59,13 +64,20 @@ jobs:
         DB_USER: postgres
         DB_PASSWORD: postgres
 
+    # 前端检查
+    - name: Install Dashboard dependencies
+      working-directory: ./dashboard
+      run: npm ci
+
+    - name: Dashboard Build Check
+      working-directory: ./dashboard
+      run: npm run build
+
   build-and-push-images:
     runs-on: ubuntu-latest
     needs: lint-and-test
-    # This job only runs when pushing to main branch, not on PRs
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     
-    # Needs permissions to push to GitHub Packages
     permissions:
       contents: read
       packages: write
