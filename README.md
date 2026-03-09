@@ -221,7 +221,7 @@ MIT License - 详见 [LICENSE](LICENSE) 文件
 
 ## 👥 作者
 
-- 开发者：[@xingzhiqiang-glitch](https://github.com/xingzhiqiang-glitch)
+- 开发者：[@walkxing-glitch](https://github.com/walkxing-glitch)
 
 ## 🙏 致谢
 

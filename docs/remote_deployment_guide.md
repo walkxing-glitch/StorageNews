@@ -11,7 +11,7 @@
 
 ```bash
 # 在服务器终端执行登录
-echo "ghp_你的_PAT_通行证" | docker login ghcr.io -u xingzhiqiang-glitch --password-stdin
+echo "ghp_你的_PAT_通行证" | docker login ghcr.io -u walkxing-glitch --password-stdin
 ```
 
 ## 3. 准备部署文件
@@ -23,8 +23,8 @@ echo "ghp_你的_PAT_通行证" | docker login ghcr.io -u xingzhiqiang-glitch --
 3. `nginx/` 文件夹 (如果你打算配置域名的话)
 
 > 💡 **小贴士**: `docker-compose.prod.yml` 里面使用的镜像名字应该是你刚才打包出来的那两个：
-> - `ghcr.io/xingzhiqiang-glitch/storagenews-server:latest`
-> - `ghcr.io/xingzhiqiang-glitch/storagenews-dashboard:latest`
+> - `ghcr.io/walkxing-glitch/storagenews-server:latest`
+> - `ghcr.io/walkxing-glitch/storagenews-dashboard:latest`
 
 ## 4. 拉取最新代码并启动 (或更新)
 以后每次你在本地推了代码 (`git push`)，等 GitHub 上的机器人打包完转圈圈结束后，你只需连上服务器，在 `/opt/storagenews/` 目录下敲两行命令：
