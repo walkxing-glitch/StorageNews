@@ -9,8 +9,9 @@ on:
 env:
   REGISTRY: ghcr.io
   # github.repository returns username/repository (e.g., walkxing-glitch/StorageNews)
-  SERVER_IMAGE_NAME: ${{ github.repository }}-server
-  DASHBOARD_IMAGE_NAME: ${{ github.repository }}-dashboard
+  # 建议显式写死为小写，避免 GitHub 仓库名的大小写对镜像名字造成干扰
+  SERVER_IMAGE_NAME: walkxing-glitch/storagenews-server
+  DASHBOARD_IMAGE_NAME: walkxing-glitch/storagenews-dashboard
 
 jobs:
   lint-and-test:
