@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getNews, getStats, getTodayNews } from '../models/News.js';
-import rules from '../config/rules.json';
+import rules from '../config/rules.json' with { type: 'json' };
 const { vendorKeywords: STORAGE_VENDORS } = rules;
 import { getTopNews, formatTopNewsMessage } from '../services/scoring.js';
 import { pool } from '../config/database.js';

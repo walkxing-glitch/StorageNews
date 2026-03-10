@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { saveNews, NewsItem } from '../models/News.js';
-import rules from '../config/rules.json';
+import rules from '../config/rules.json' with { type: 'json' };
 
 const { newsApiQueries: NEWSAPI_QUERIES } = rules;
 

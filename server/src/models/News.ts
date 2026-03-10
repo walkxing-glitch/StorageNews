@@ -1,6 +1,6 @@
 import { pool } from '../config/database.js';
 import CryptoJS from 'crypto-js';
-import rules from '../config/rules.json';
+import rules from '../config/rules.json' with { type: 'json' };
 import { NewsItem } from '../types/news.js';
 export { NewsItem };
 import { calculateScore } from '../services/scoring.js';

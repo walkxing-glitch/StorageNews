@@ -1,5 +1,5 @@
 import { NewsItem, ScoredNewsItem } from '../types/news.js';
-import rules from '../config/rules.json';
+import rules from '../config/rules.json' with { type: 'json' };
 
 const {
   sourceWeights: SOURCE_WEIGHTS,

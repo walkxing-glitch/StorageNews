@@ -1,6 +1,6 @@
 import Parser from 'rss-parser';
 import { saveNews, NewsItem } from '../models/News.js';
-import rules from '../config/rules.json';
+import rules from '../config/rules.json' with { type: 'json' };
 
 const { rssSources: RSS_SOURCES } = rules;
 
