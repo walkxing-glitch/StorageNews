@@ -208,13 +208,13 @@ export async function sendToWeLink(message: string): Promise<boolean> {
  * 注意：个人微信需要使用 wechaty 或类似库，这里提供企业微信的实现
  * 如果是个人微信，需要额外配置 wechaty
  */
-export async function sendToWeChat(message: string): Promise<boolean> {
+export async function sendToWeChat(message: string, newsList: NewsItem[] = []): Promise<boolean> {
     const webhookUrl = process.env.WECHAT_WEBHOOK_URL;
 
     if (!webhookUrl || webhookUrl.includes('YOUR_WEBHOOK_KEY_HERE')) {
         // Webhook not configured — fall back to WeChat Bot (personal WeChat, requires prior QR scan)
         console.warn('WeChat webhook not configured, trying WeChat Bot...');
-        return await sendToWeChatBot([]);
+        return await sendToWeChatBot(newsList);
     }
 
     try {
@@ -370,7 +370,7 @@ export async function sendDailyNews(newsList: NewsItem[]): Promise<void> {
     // 并行发送到所有平台（WeChat 内部已处理 webhook → bot 降级）
     const results = await Promise.allSettled([
         sendToWeLink(message),
-        sendToWeChat(message)
+        sendToWeChat(message, newsList)
     ]);
 
     const successCount = results.filter(r => r.status === 'fulfilled' && r.value).length;

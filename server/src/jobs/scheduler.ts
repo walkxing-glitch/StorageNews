@@ -66,30 +66,27 @@ export function startScheduler() {
 }
 
 export async function getDailyPushNewsList(): Promise<PushNewsRow[]> {
-  // 先尝试获取今天的 Top 10 新闻
-  const today = new Date();
-  const todayStr = today.toISOString().split('T')[0];
-
+  // 获取最近 24 小时内的 Top 10 新闻
   const todayResult = await pool.query(
     `SELECT id, title, url, score, summary_cn, source_name, vendor, category, published_at
      FROM news
-     WHERE DATE(published_at) = $1
+     WHERE published_at > NOW() - INTERVAL '24 hours'
      ORDER BY score DESC
-     LIMIT 10`,
-    [todayStr]
+     LIMIT 10`
   );
 
   let rows: PushNewsRow[] = todayResult.rows;
 
-  // 如果今天新闻不足10条，获取最新的新闻补充
+  // 如果最近 24 小时新闻不足 10 条，获取最新的新闻补充
   if (rows.length < 10) {
+    const idsToExclude = rows.length > 0 ? rows.map(r => r.id) : [-1];
     const latestResult = await pool.query(
       `SELECT id, title, url, score, summary_cn, source_name, vendor, category, published_at
        FROM news
-       WHERE DATE(published_at) != $1
+       WHERE id NOT IN (${idsToExclude.join(',')})
        ORDER BY published_at DESC, score DESC
-       LIMIT ${10 - rows.length}`,
-      [todayStr]
+       LIMIT $1`,
+      [10 - rows.length]
     );
     rows = [...rows, ...latestResult.rows];
   }
